@@ -47,17 +47,32 @@ public class AG {
 		
 		int pAtual = 0;
 		iniciarPopulacao(populacoes.get(0));
-		//populacao1.set(0, new byte[]{7, 1, 4, 2, 0, 6, 3, 5}); testando o critério de parada
+		populacao1.set(0, new byte[]{7, 1, 4, 2, 0, 6, 3, 5});// testando o critério de parada (comentar para rodar livremente)
 		
 		while (regraParada(populacoes.get(pAtual))){
 			gerarFilhos(populacoes.get(pAtual), populacoes.get(pAtual==1? 0:1));
 			pAtual = pAtual==1? 0:1;
 		}
 		
+		mostrarPopulacao(populacoes.get(pAtual));
 		return;
 		
 	}
 	
+	private static void mostrarPopulacao(List<byte[]> list) {
+		for (byte[] indv : list){
+			if (avaliarIndividuo(indv) == 100){
+				
+				System.out.print("Indivíduo solução: {");
+				for (byte value : indv){
+					System.out.print(","+value);
+				}
+				System.out.print("}");
+			}
+		}
+		
+	}
+
 	private static void iniciarPopulacao(List<byte[]> populacao){
 		for (int i = 0; i < TAMANHO_POP; i++){
 			byte[] individuo = new byte[8];
