@@ -47,7 +47,7 @@ public class AG {
 		
 		int pAtual = 0;
 		iniciarPopulacao(populacoes.get(0));
-		populacao1.set(0, new byte[]{7, 1, 4, 2, 0, 6, 3, 5});// testando o critério de parada (comentar para rodar livremente)
+		populacao1.set(0, new byte[]{7, 1, 4, 2, 0, 6, 3, 5}); // testando o critério de parada (comentar para rodar livremente)
 		
 		while (regraParada(populacoes.get(pAtual))){
 			gerarFilhos(populacoes.get(pAtual), populacoes.get(pAtual==1? 0:1));
