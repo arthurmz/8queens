@@ -26,7 +26,7 @@ public class AG {
 	 * Nesse caso a mutação é aplicada nos 3 primeiros bits (range de 0 a 7) */
 	static float PROB_MUTACAO = 0.01f;
 	
-	static int PONTO_RECOMBINACAO = 4;
+	static int PONTO_RECOMBINACAO = 5;
 	
 	static Random rand = new Random();
 	
@@ -47,7 +47,7 @@ public class AG {
 		
 		int pAtual = 0;
 		iniciarPopulacao(populacoes.get(0));
-		populacao1.set(0, new byte[]{7, 1, 4, 2, 0, 6, 3, 5});
+		//populacao1.set(0, new byte[]{7, 1, 4, 2, 0, 6, 3, 5}); testando o critério de parada
 		
 		while (regraParada(populacoes.get(pAtual))){
 			gerarFilhos(populacoes.get(pAtual), populacoes.get(pAtual==1? 0:1));
@@ -174,7 +174,26 @@ public class AG {
 	 * @param filhos
 	 */
 	private static void aplicarMutacao(byte[] filhos) {
-		//TODO
+		int valor = (int) (PROB_MUTACAO * 100);
+		
+		
+		for (int i = 0; i < filhos.length; i++){
+			for (int j = 0; j < 3; j++){
+				int mutar = rand.nextInt(100);
+				//100 - 4
+				//010 - 2
+				//001 - 1
+				
+				if (mutar <= valor){
+					if (j == 0)
+						filhos[i] = (byte) ((~filhos[i]) & 0x4);
+					else if (j == 1)
+						filhos[i] = (byte) ((~filhos[i]) & 0x2);
+					else if (j == 2)
+						filhos[i] = (byte) ((~filhos[i]) & 0x1);
+				}
+			}
+		}
 	}
 
 	/**
